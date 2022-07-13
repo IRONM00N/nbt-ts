@@ -18,7 +18,7 @@ All notable changes to this library will be documented here.
 
 - Added support for `Int8Array`s in encode function.
 - Switched to using node's buffer bigint methods with temporary shim until
-node 12 reaches _active LTS_ stage.
+  node 12 reaches _active LTS_ stage.
 
 ## 1.0.5
 

@@ -1,13 +1,35 @@
 {
-    "compilerOptions": {
-        "target": "es2019",
-        "module": "commonjs",
-        "strict": true,
-        "lib": ["esnext"],
-        "outDir": "lib",
-        "declaration": true
-    },
-    "include": [
-        "./src"
-    ]
+	"compilerOptions": {
+		/* Type Checking */
+		"alwaysStrict": true,
+		"noImplicitOverride": true,
+		"strict": true,
+		"useUnknownInCatchVariables": false,
+
+		/* Modules */
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+
+		/* Emit */
+		"declaration": true,
+		"declarationMap": true,
+		"newLine": "lf",
+		"outDir": "lib",
+		"preserveConstEnums": true,
+		"removeComments": true,
+		"sourceMap": true,
+		"stripInternal": true,
+
+		/* Language and Environment */
+		"target": "ES2022",
+		"useDefineForClassFields": false,
+
+		/* Interop Constraints */
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/* Output Formatting */
+		"noErrorTruncation": true
+	},
+	"include": ["./src"]
 }
