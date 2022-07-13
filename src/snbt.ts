@@ -207,11 +207,15 @@ export function parse(text: string, options: ParseOptions = {}) {
             skipWhitespace()
             if (text[index] == ",") {
                 if (array.length == 0) throw unexpectedChar()
-                else index++ , skipWhitespace()
+                else index++, skipWhitespace()
             } else if (array.length > 0 && text[index] != "]") {
                 throw unexpectedChar(index - 1)
             }
             if (text[index] == "]") return (index++ , array)
+            if (/^\d$/.test(text[index])) {
+                const slice = text.slice(index);
+                if (/^\d*:/.test(slice)) (index += slice.indexOf(":") + 1), skipWhitespace();
+            }
             array.push(parse())
         }
         throw unexpectedEnd()
