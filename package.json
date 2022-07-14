@@ -1,27 +1,29 @@
 {
-  "name": "nbt-ts",
-  "version": "1.3.4",
-  "description": "An easy to use encoder and decoder for the NBT format",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/janispritzkau/nbt-ts.git"
-  },
-  "scripts": {
-    "test": "node test",
-    "prepare": "tsc && npm run test"
-  },
-  "keywords": [
-    "nbt",
-    "minecraft",
-    "typescript",
-    "snbt"
-  ],
-  "author": "Janis Pritzkau <janispritzkau@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^18.0.4",
-    "typescript": "^4.7.4"
-  }
+	"name": "nbt-ts",
+	"version": "1.3.4",
+	"description": "An easy to use encoder and decoder for the NBT format",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/janispritzkau/nbt-ts.git"
+	},
+	"scripts": {
+		"test": "node test",
+		"prepare": "yarn tsc && yarn test",
+		"format": "yarn prettier . --write"
+	},
+	"keywords": [
+		"nbt",
+		"minecraft",
+		"typescript",
+		"snbt"
+	],
+	"author": "Janis Pritzkau <janispritzkau@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^18.0.4",
+		"prettier": "^2.7.1",
+		"typescript": "^4.7.4"
+	}
 }

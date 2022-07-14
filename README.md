@@ -14,34 +14,34 @@ Node 10.4 or higher is required for BigInts, which are used to represent 64 bit 
 ## Usage
 
 ```js
-const { encode, decode, Byte, Short, Int, Float } = require("nbt-ts")
+const { encode, decode, Byte, Short, Int, Float } = require("nbt-ts");
 
 const buffer = encode("root", {
-    byte: new Byte(-1),
-    short: new Short(65535),
-    int: new Int(-2147483648),
-    long: 0x7fffffffffffffffn,
-    float: new Float(0.75),
-    double: 0.1 + 0.2,
-    string: "Hello world",
-    list: ["item 1", "item 2"],
-    compound: {
-        byteArray: Buffer.from([0x80, 0x40, 0x20]),
-        // Int8Array does work here too
-        intArray: new Int32Array([1, 2, 3, 4]),
-        longArray: new BigInt64Array([1n, 2n, 3n, 4n])
-    },
-})
+	byte: new Byte(-1),
+	short: new Short(65535),
+	int: new Int(-2147483648),
+	long: 0x7fffffffffffffffn,
+	float: new Float(0.75),
+	double: 0.1 + 0.2,
+	string: "Hello world",
+	list: ["item 1", "item 2"],
+	compound: {
+		byteArray: Buffer.from([0x80, 0x40, 0x20]),
+		// Int8Array does work here too
+		intArray: new Int32Array([1, 2, 3, 4]),
+		longArray: new BigInt64Array([1n, 2n, 3n, 4n]),
+	},
+});
 
-decode(Buffer.from("02000973686F7274546573747FFF", "hex"))
+decode(Buffer.from("02000973686F7274546573747FFF", "hex"));
 // → { name: 'shortTest', value: Short { value: 32767 }, length: 14 }
 
 // Encode unnamed tag
-encode(null, "a")
+encode(null, "a");
 // → <Buffer 08 00 01 61>
 
 // Decode unnamed tag
-decode(Buffer.from("08000161", "hex"), { unnamed: true })
+decode(Buffer.from("08000161", "hex"), { unnamed: true });
 // → { name: null, value: 'a', length: 4 }
 ```
 
@@ -51,12 +51,12 @@ However when decoded, they will always have the signed representation. If you wa
 to convert a number to the unsigned representation, you might do something like this:
 
 ```js
-value & 0xff   // for bytes
-value & 0xffff // for shorts
-value >>> 0    // for ints
-BigInt.asUintN(64, value) // for longs
+value & 0xff; // for bytes
+value & 0xffff; // for shorts
+value >>> 0; // for ints
+BigInt.asUintN(64, value); // for longs
 // or
-value & 0xffffffffffffffffn
+value & 0xffffffffffffffffn;
 ```
 
 ## SNBT
@@ -82,18 +82,18 @@ Here are all the types represented in SNBT:
 Here is an example how you can stringify or parse SNBT:
 
 ```js
-const { stringify, parse } = require("nbt-ts")
+const { stringify, parse } = require("nbt-ts");
 
-const tag = parse(`{'Flying' :1b , unquoted: hello} `)
+const tag = parse(`{'Flying' :1b , unquoted: hello} `);
 // → { Flying: Byte { value: 1 }, unquoted: 'hello' }
 
-stringify(tag)
+stringify(tag);
 // → '{Flying:1b,unquoted:"hello"}'
 ```
 
 ## Related projects
 
 - [`mc-chat-format`](https://github.com/janispritzkau/mc-chat-format).
-    Converts and formats Minecraft's JSON Chat components.
+  Converts and formats Minecraft's JSON Chat components.
 - [`mcproto`](https://github.com/janispritzkau/mcproto) (Minecraft protocol implementation)
 - [`rcon-client`](https://github.com/janispritzkau/rcon-client)
