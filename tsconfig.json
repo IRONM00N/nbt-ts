@@ -1,13 +1,16 @@
 {
-    "compilerOptions": {
-        "target": "es2019",
-        "module": "commonjs",
-        "strict": true,
-        "lib": ["esnext"],
-        "outDir": "lib",
-        "declaration": true
-    },
-    "include": [
-        "./src"
-    ]
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "strict": true,
+    "lib": ["esnext"],
+    "outDir": "lib",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true
+  },
+  "include": ["./src"]
 }
