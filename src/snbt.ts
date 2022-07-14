@@ -1,4 +1,4 @@
-import * as nbt from ".";
+import { Byte, Float, Int, Short, Tag, TagArray, TagMap, TagObject } from ".";
 
 const unquotedRegExp = /^[0-9A-Za-z.+_-]+$/;
 
@@ -8,7 +8,7 @@ export interface StringifyOptions {
 	quote?: "single" | "double";
 }
 
-export function stringify(tag: nbt.Tag, options: StringifyOptions = {}): string {
+export function stringify(tag: Tag, options: StringifyOptions = {}): string {
 	const pretty = !!options.pretty,
 		breakLength = options.breakLength || 70;
 	const quoteChar = options.quote == "single" ? "'" : options.quote == "double" ? '"' : null;
@@ -34,14 +34,14 @@ export function stringify(tag: nbt.Tag, options: StringifyOptions = {}): string 
 		return `${q}${text.replace(RegExp(`[${q}\\\\]`, "g"), (x) => `\\${x}`)}${q}`;
 	}
 
-	function stringify(tag: nbt.Tag, depth: number): string {
+	function stringify(tag: Tag, depth: number): string {
 		const space = pretty ? " " : "",
 			sep = pretty ? ", " : ",";
-		if (tag instanceof nbt.Byte) return `${tag.value}b`;
-		else if (tag instanceof nbt.Short) return `${tag.value}s`;
-		else if (tag instanceof nbt.Int) return `${tag.value | 0}`;
+		if (tag instanceof Byte) return `${tag.value}b`;
+		else if (tag instanceof Short) return `${tag.value}s`;
+		else if (tag instanceof Int) return `${tag.value | 0}`;
 		else if (typeof tag == "bigint") return `${tag}l`;
-		else if (tag instanceof nbt.Float) return `${tag.value}f`;
+		else if (tag instanceof Float) return `${tag.value}f`;
 		else if (typeof tag == "number") return Number.isInteger(tag) ? `${tag}.0` : tag.toString();
 		else if (typeof tag == "string") return escapeString(tag);
 		else if (tag instanceof Buffer || tag instanceof Int8Array) return `[B;${space}${[...tag].join(sep)}]`;
@@ -75,7 +75,7 @@ export interface ParseOptions {
 	useMaps?: boolean;
 }
 
-export function parse(text: string, options: ParseOptions = {}) {
+export function parse(text: string, options: ParseOptions = {}): Tag {
 	let index = 0,
 		i = 0,
 		char = "";
@@ -105,21 +105,21 @@ export function parse(text: string, options: ParseOptions = {}) {
 				if (hasFloatingPoint) return index--, null;
 				hasFloatingPoint = true;
 			} else if (char == "f" || char == "F") {
-				return new nbt.Float(+text.slice(i, index - 1));
+				return new Float(+text.slice(i, index - 1));
 			} else if (char == "d" || char == "D") {
 				return +text.slice(i, index - 1);
 			} else if (char == "b" || char == "B") {
-				return new nbt.Byte(+text.slice(i, index - 1));
+				return new Byte(+text.slice(i, index - 1));
 			} else if (char == "s" || char == "S") {
-				return new nbt.Short(+text.slice(i, index - 1));
+				return new Short(+text.slice(i, index - 1));
 			} else if (char == "l" || char == "L") {
 				return BigInt(text.slice(i, index - 1));
 			} else if (hasFloatingPoint) {
 				return +text.slice(i, --index);
-			} else return new nbt.Int(+text.slice(i, --index));
+			} else return new Int(+text.slice(i, --index));
 		}
 		if (hasFloatingPoint) return +text.slice(i, index);
-		else return new nbt.Int(+text.slice(i, index));
+		else return new Int(+text.slice(i, index));
 	}
 
 	function readUnquotedString() {
@@ -161,16 +161,14 @@ export function parse(text: string, options: ParseOptions = {}) {
 		}
 	}
 
-	function readCompound(): nbt.TagObject | nbt.TagMap {
-		const entries: [string, nbt.Tag][] = [];
+	function readCompound(): TagObject | TagMap {
+		const entries: [string, Tag][] = [];
 		let first = true;
 		while (true) {
 			skipCommas(first, "}"), (first = false);
 			if (text[index] == "}") {
 				index++;
-				return options.useMaps
-					? new Map(entries)
-					: entries.reduce<nbt.TagObject>((obj, [k, v]) => ((obj[k] = v), obj), {});
+				return options.useMaps ? new Map(entries) : entries.reduce<TagObject>((obj, [k, v]) => ((obj[k] = v), obj), {});
 			}
 			const key = readString();
 			skipWhitespace();
@@ -206,7 +204,7 @@ export function parse(text: string, options: ParseOptions = {}) {
 		if ("BILbil".includes(text[index]) && text[index + 1] == ";") {
 			return readArray(text[(index += 2) - 2].toUpperCase());
 		}
-		const array: nbt.TagArray = [];
+		const array: TagArray = [];
 		while (index < text.length) {
 			skipWhitespace();
 			if (text[index] == ",") {
@@ -225,7 +223,7 @@ export function parse(text: string, options: ParseOptions = {}) {
 		throw unexpectedEnd();
 	}
 
-	function parse(): nbt.Tag {
+	function parse(): Tag {
 		skipWhitespace();
 		(i = index), (char = text[index]);
 		if (char == "{") return index++, readCompound();

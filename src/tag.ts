@@ -15,29 +15,33 @@ export enum TagType {
 }
 
 export class Byte {
-	constructor(public value: number) {}
-	valueOf() {
+	public constructor(public value: number) {}
+
+	public valueOf(): number {
 		return this.value;
 	}
 }
 
 export class Short {
-	constructor(public value: number) {}
-	valueOf() {
+	public constructor(public value: number) {}
+
+	public valueOf(): number {
 		return this.value;
 	}
 }
 
 export class Int {
-	constructor(public value: number) {}
-	valueOf() {
+	public constructor(public value: number) {}
+
+	public valueOf(): number {
 		return this.value;
 	}
 }
 
 export class Float {
-	constructor(public value: number) {}
-	valueOf() {
+	public constructor(public value: number) {}
+
+	public valueOf(): number {
 		return this.value;
 	}
 }
