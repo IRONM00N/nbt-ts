@@ -1,4 +1,5 @@
 /examples
-/src
 /test
 tsconfig.json
+.prettierignore
+.prettierrc.json
