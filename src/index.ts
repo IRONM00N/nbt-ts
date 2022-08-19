@@ -1,7 +1,7 @@
-import { Tag, TagType, Byte, Float, Int, Short, getTagType, TagObject, TagMap } from "./tag";
+import { Byte, Float, Int, Short, TagType, getTagType, type Tag, type TagMap, type TagObject } from "./tag.js";
 
-export * from "./tag";
-export * from "./snbt";
+export * from "./snbt.js";
+export * from "./tag.js";
 
 export interface DecodeResult {
 	name: string | null;
@@ -59,7 +59,7 @@ export function encode(name: string | null, tag: Tag | null): Buffer {
 	// write tag value
 	if (tag != null) ({ buffer, offset } = encodeTagValue(tag, buffer, offset));
 
-	return buffer.slice(0, offset);
+	return buffer.subarray(0, offset);
 }
 
 /** Encode a string with it's length prefixed as unsigned 16 bit integer */
@@ -106,7 +106,7 @@ function decodeTagValue(type: number, buffer: Buffer, offset: number, useMaps: b
 		case TagType.ByteArray: {
 			const len = buffer.readUInt32BE(offset);
 			offset += 4;
-			value = buffer.slice(offset, (offset += len));
+			value = buffer.subarray(offset, (offset += len));
 			break;
 		}
 		case TagType.String: {
