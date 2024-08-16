@@ -1,4 +1,4 @@
-import { encode, decode, Byte, Short, Int, Float } from "../src";
+import { encode, decode, Byte, Short, Int, Float } from "#lib";
 
 const buffer = encode("root", {
 	byte: new Byte(-1),

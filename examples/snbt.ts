@@ -1,4 +1,4 @@
-import { stringify, parse } from "../src";
+import { parse, stringify } from "#lib";
 
 console.log(stringify({ json: `{"text":"Hello"}` }));
 

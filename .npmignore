@@ -1,5 +1,13 @@
+/.yarn
 /examples
 /test
+/dist
 tsconfig.json
+tsconfig.*.json
 .prettierignore
 .prettierrc.json
+.yarnrc.yml
+yarn.lock
+tsconfig.tsbuildinfo
+tsconfig*.tsbuildinfo
+.gitattributes

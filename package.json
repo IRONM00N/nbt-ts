@@ -1,18 +1,35 @@
 {
 	"name": "@ironm00n/nbt-ts",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "An easy to use encoder and decoder for the NBT format",
-	"main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/esm/index.d.ts",
+	"type": "module",
+	"main": "./lib/cjs/index.js",
+	"module": "./lib/esm/index.js",
+	"types": "./lib/esm/index.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./lib/esm/index.d.ts",
+				"default": "./lib/esm/index.js"
+			},
+			"require": {
+				"types": "./lib/cjs/index.d.ts",
+				"default": "./lib/cjs/index.js"
+			},
+			"default": "./lib/cjs/index.js"
+		}
+	},
+	"imports": {
+		"#lib": "./lib/esm/index.js"
+	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ironmoon/nbt-ts.git"
+		"url": "git+https://github.com/ironmoon/nbt-ts.git"
 	},
 	"scripts": {
-		"test": "node test",
-		"build": "tsc && tsc --module esnext --outDir lib/esm",
-    "prepare": "yarn build && yarn test",
+		"test": "node --test dist/test",
+		"build": "yarn tsc -b tsconfig.json tsconfig.cjs.json",
+		"prepare": "yarn build && yarn test",
 		"format": "yarn prettier . --write"
 	},
 	"keywords": [
@@ -24,9 +41,9 @@
 	"author": "Janis Pritzkau <janispritzkau@gmail.com>",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/node": "^18.0.4",
-		"prettier": "^2.7.1",
-		"typescript": "^4.7.4"
+		"@types/node": "^22.3.0",
+		"prettier": "^3.3.3",
+		"typescript": "^5.5.4"
 	},
 	"sideEffects": false,
 	"publishConfig": {

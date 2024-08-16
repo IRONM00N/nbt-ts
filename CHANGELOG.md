@@ -2,6 +2,14 @@
 
 All notable changes to this library will be documented here.
 
+## 1.4.1
+
+- Output both CommonJS and ESM.
+
+## 1.4.0
+
+- Added support for indexed arrays in SNBT parsing.
+
 ## 1.2.5
 
 - Fixed bug with encoding and decoding `null` tags.

@@ -1,10 +1,11 @@
-import { readFileSync } from "fs";
+import { decode, encode } from "#lib";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { unzipSync } from "zlib";
-import { decode, encode } from "../src";
 
-console.log(decode(readFileSync("examples/hello_world.nbt")));
+console.log(decode(readFileSync(join(import.meta.dirname, "../../examples/hello_world.nbt"))));
 
-const bigTestBuffer = unzipSync(readFileSync("examples/bigtest.nbt"));
+const bigTestBuffer = unzipSync(readFileSync(join(import.meta.dirname, "../../examples/bigtest.nbt")));
 const result = decode(bigTestBuffer);
 
 console.log(result);

@@ -1,17 +1,4 @@
 {
-	"compilerOptions": {
-		"target": "es2022",
-		"module": "commonjs",
-		"strict": true,
-		"lib": ["esnext"],
-		"outDir": "lib/cjs",
-		"moduleResolution": "node",
-		"declaration": true,
-		"declarationMap": true,
-		"sourceMap": true,
-		"forceConsistentCasingInFileNames": true,
-		"alwaysStrict": true,
-		"esModuleInterop": true
-	},
-	"include": ["./src"]
+	"references": [{ "path": "./src" }, { "path": "./test" }, { "path": "./examples" }],
+	"files": []
 }

@@ -1,7 +1,7 @@
-# NBT
+# @ironm00n/nbt-ts
 
-[![npm](https://img.shields.io/npm/v/nbt-ts.svg)](https://www.npmjs.com/package/nbt-ts)
-[![downloads](https://img.shields.io/npm/dm/nbt-ts.svg)](https://www.npmjs.com/package/nbt-ts)
+[![npm](https://img.shields.io/npm/v/@ironm00n/nbt-ts.svg)](https://www.npmjs.com/package/@ironm00n/nbt-ts)
+[![downloads](https://img.shields.io/npm/dm/@ironm00n/nbt-ts.svg)](https://www.npmjs.com/package/@ironm00n/nbt-ts)
 
 An easy to use encoder and decoder for the [NBT format](https://wiki.vg/NBT).
 
@@ -14,7 +14,7 @@ Node 10.4 or higher is required for BigInts, which are used to represent 64 bit 
 ## Usage
 
 ```js
-const { encode, decode, Byte, Short, Int, Float } = require("nbt-ts");
+import { encode, decode, Byte, Short, Int, Float } from "@ironm00n/nbt-ts";
 
 const buffer = encode("root", {
 	byte: new Byte(-1),
@@ -82,7 +82,7 @@ Here are all the types represented in SNBT:
 Here is an example how you can stringify or parse SNBT:
 
 ```js
-const { stringify, parse } = require("nbt-ts");
+import { stringify, parse } from "ironm00n/nbt-ts";
 
 const tag = parse(`{'Flying' :1b , unquoted: hello} `);
 // → { Flying: Byte { value: 1 }, unquoted: 'hello' }
@@ -90,6 +90,10 @@ const tag = parse(`{'Flying' :1b , unquoted: hello} `);
 stringify(tag);
 // → '{Flying:1b,unquoted:"hello"}'
 ```
+
+## Changes in this fork
+
+- Added support for indexed arrays in SNBT
 
 ## Related projects
 

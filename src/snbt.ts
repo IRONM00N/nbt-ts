@@ -1,4 +1,4 @@
-import { Byte, Float, Int, Short, Tag, TagArray, TagMap, TagObject } from "./index.js";
+import { Byte, Float, Int, Short, type Tag, type TagArray, type TagMap, type TagObject } from "./index.js";
 
 const unquotedRegExp = /^[0-9A-Za-z.+_-]+$/;
 
